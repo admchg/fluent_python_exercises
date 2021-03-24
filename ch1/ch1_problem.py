@@ -45,10 +45,10 @@ class Binary:
         binary_sum = ""
         for i, j in zip(self_binary_str[::-1], other_binary_str[::-1]):
             if i == j:
-                binary_sum = carry + binary_sum
+                binary_sum = f"{carry}{binary_sum}"
                 carry = i
             else:
-                binary_sum = _not(carry) + binary_sum
+                binary_sum = f"{_not(carry)}{binary_sum}"
 
         if carry == "1":
             binary_sum = carry + binary_sum
