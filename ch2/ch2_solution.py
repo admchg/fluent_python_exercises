@@ -40,13 +40,12 @@ def check_brackets(input_string):
     bracket_ends = "}])"
     bracket_map = dict(zip(bracket_starts, bracket_ends))
 
-    head, *mid, tail = input_string
-
     if len(input_string) == 0:
         return True
     if len(input_string) == 1:
         return input_string not in (bracket_starts + bracket_ends)
 
+    head, *mid, tail = input_string
     if head in bracket_ends:
         return False
     if head in bracket_starts:
@@ -138,7 +137,7 @@ def search_dictionary(dict_to_search, key):
     >>> search_dictionary(test_dict1, 'e')
     9
     >>> test_dict2 = {'a': {'n': {'d': 2, 'q': 3}}, 'b': {'m': {'e': 9}, 'u': 4}}
-    >>> search_dictionary(test_dict1, 'q')
+    >>> search_dictionary(test_dict2, 'q')
     3
     """
 
@@ -154,3 +153,9 @@ def search_dictionary(dict_to_search, key):
                 dq.append(value)
 
     raise KeyError(f"{key} not found")
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()
