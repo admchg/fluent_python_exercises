@@ -112,7 +112,7 @@ def search_dictionary(dict_to_search, key):
     >>> search_dictionary(test_dict1, 'e')
     9
     >>> test_dict2 = {'a': {'n': {'d': 2, 'q': 3}}, 'b': {'m': {'e': 9}, 'u': 4}}
-    >>> search_dictionary(test_dict1, 'q')
+    >>> search_dictionary(test_dict2, 'q')
     3
     """
 
