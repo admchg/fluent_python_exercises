@@ -20,9 +20,10 @@ def get_data(url: str) -> str:
 # ---------------------------------
 # ## Problem 1
 # Let m be a natural number and [m] := {1, ..., m}
-# Suppose you have a sequence s of length n, n \in \mathbb{N} in [m]
+# Suppose you have a sequence s of length n, n \in \mathbb{N}, with elements in [m]
 # and that there exist some x \in s which occurs at least n/2 times in s
 # Find x
+# Use numbers.txt for testing
 
 
 def frequent(s: str) -> int:
