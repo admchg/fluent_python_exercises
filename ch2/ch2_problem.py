@@ -35,11 +35,23 @@ def check_brackets(input_string):
     >>> check_brackets("[[{[3 + 4}*2]] + 6")
     False
     """
-
     bracket_starts = "{[("
     bracket_ends = "}])"
     bracket_map = dict(zip(bracket_starts, bracket_ends))
-
+    
+    remaining = input_string
+    stack = []
+    while len(remaining)!=0:
+        char, *remaining = remaining
+        if char in bracket_map.keys():
+            stack.append(char)
+        if char in bracket_map.values():
+            *first, end = stack
+            if bracket_map[end] == char:
+                stack = first
+    if len(stack) == 0:
+        return True
+    
     return False
 
 
@@ -70,11 +82,20 @@ def my_histogram(input_array, bins, include=False):
     [3, 2, 0, 3]
     >>> my_histogram([10, 2, 2, 1, 5, 6, 11, 12], [3, 6, 9], False)
     [3, 1, 1, 3]
-    >>> my_histogram(range(5), [2, 3])
+    >>> my_histogram(list(range(5)), [2, 3])
     [2, 1, 2]
     """
     counter = [0] * (len(bins) + 1)
-
+    input_array.sort()
+    
+    lastval = 0
+    bins.append(max(input_array)+1)
+    for i, binval in enumerate(bins):
+        count = bisect.bisect(input_array, binval)
+        if (binval in input_array) and (include is False):
+            count = bisect.bisect(input_array, binval) - 1
+        counter[i] = count - lastval
+        lastval = count
     return counter
 
 
@@ -115,7 +136,6 @@ def search_dictionary(dict_to_search, key):
     >>> search_dictionary(test_dict2, 'q')
     3
     """
-
     dq = deque()
     dq.append(dict_to_search)
 
