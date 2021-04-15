@@ -33,6 +33,7 @@ def frequent(s: str) -> int:
 # ---------------------------------
 # ## Problem 2
 # For the previous problem, what if the frequency was instead some n/k for some k a natural number?
+# Complete the function to generate some test data and complete the frequent_k function
 
 k = 4
 g_k = np.random.randint(100)
@@ -52,7 +53,7 @@ def frequent_k(s: str) -> int:
 # ---------------------------------
 # ## Problem 3
 # Go back to Problem 1 and 2 and evaluate your time complexity.
-# Is it possible to do better than O(log(n) + log(m))? Why / why not?
+# Is it possible to do better than O(log(n) + log(m)) in space complexity? Why / why not?
 # Challenge: What is the probability that your algorithm runs in constant time?
 
 # ---------------------------------
