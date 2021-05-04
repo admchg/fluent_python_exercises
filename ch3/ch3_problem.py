@@ -6,7 +6,7 @@
 
 import numpy as np
 import requests
-
+from collections import Counter
 # ---------------------------------
 # ## Problem 0
 # For testing, you should use the numbers.txt in the git repo
@@ -14,7 +14,8 @@ import requests
 
 
 def get_data(url: str) -> str:
-    return 0
+    r = requests.get(url)
+    return list(r.content)
 
 
 # ---------------------------------
@@ -27,7 +28,14 @@ def get_data(url: str) -> str:
 
 
 def frequent(s: str) -> int:
-    return 0
+    counter = dict(Counter(s))
+    keys = [ key for (key, value) in sorted(counter.items(),  key=lambda x: x[1]) ]    
+    vals = [ value for (key, value) in sorted(counter.items(), key=lambda x: x[1]) ]
+    output = None
+    for i in range(len(keys)): 
+        if vals[i] > len(s)/2:
+            output = vals[i]
+    return output
 
 
 # ---------------------------------
