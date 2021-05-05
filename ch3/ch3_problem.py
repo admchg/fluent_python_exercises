@@ -4,6 +4,8 @@
 # # Chapter 3 Exercises
 # By: Vic
 
+from collections import Counter
+
 import numpy as np
 import requests
 
@@ -14,7 +16,8 @@ import requests
 
 
 def get_data(url: str) -> str:
-    return 0
+
+    return requests.get(url).text
 
 
 # ---------------------------------
@@ -27,7 +30,8 @@ def get_data(url: str) -> str:
 
 
 def frequent(s: str) -> int:
-    return 0
+    counter = Counter(s.split("\n"))
+    return int(counter.most_common(1)[0][0])
 
 
 # ---------------------------------
@@ -43,19 +47,27 @@ N = 10000000
 def generate_data(g, k, N):
     s_1 = np.concatenate(([g for x in range(N)], np.random.randint(100, size=N)))
     np.random.shuffle(s_1)
-    return s_1
+    return "\n".join(s_1.astype("str"))
 
 
 def frequent_k(s: str) -> int:
-    return 0
+    return frequent(s)
 
 
 # ---------------------------------
 # ## Problem 3
 # Go back to Problem 1 and 2 and evaluate your time complexity.
-# Is it possible to do better than O(log(n) + log(m)) in space complexity? Why / why not?
-# Challenge: What is the probability that your algorithm runs in constant time?
+#
+# ----
+# Complexity: O(n)
+# ----
 
+# Is it possible to do better than O(log(n) + log(m)) in space complexity? Why / why not?
+# ----
+#
+# ----
+# Challenge: What is the probability that your algorithm runs in constant time?
+#
 # ---------------------------------
 # ## Optional Problem 4
 # What if instead you merely want to determine the number with frequency n/k with probability > p?
