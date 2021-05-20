@@ -29,14 +29,14 @@ class AbstractDataPipeline(ABC):
 
         self.read_file_to_df()
         self.summarize_data()
-        self.print_summary()
+        self.output_summary()
 
     # These operations already have implementations.
 
     def summarize_data(self) -> None:
         self.summarized_data = self.df.describe()
 
-    def print_summary(self) -> None:
+    def output_summary(self) -> None:
         print(self.summarized_data)
 
     # These operations have to be implemented in subclasses.
