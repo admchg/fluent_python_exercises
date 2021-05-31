@@ -35,6 +35,11 @@ print(chardet.detect(b1)) #
 print(chardet.detect(b2)) # 'Oh やあ、調子はどうですか？'.encode('euc-jp')
 print(chardet.detect(b3)) # 'Oh やあ、調子はどうですか？'.encode('utf-8')
 
+print(b1.decode('utf-16'))
+print(b2.decode('euc-jp'))
+print(b3.decode('utf-8'))
+
+
 # Try this: first 2 bytes of b2 are replaced by b3's. What does chardet detect?
 b4 = b'Oh \xe3\x82\xa4\xa2\xa1\xa2\xc4\xb4\xbb\xd2\xa4\xcf\xa4\xc9\xa4\xa6\xa4\xc7\xa4\xb9\xa4\xab\xa1\xa9' #Japanese: Oh hey how are you doing?
 
@@ -44,7 +49,12 @@ b5 = b'Oh \xa4\xe4\x84\xe3\x81\x82\xe3\x80\x81\xe8\xaa\xbf\xe5\xad\x90\xe3\x81\x
 print(chardet.detect(b4)) # Cp1252
 print(chardet.detect(b5)) # None
 
+
+print(b4.decode('Cp1252'))
+print(b5.decode())
+
 # Learning - few byte changes maybe enough to screw up detection, maybe not; chardet bad at detecting languages (other recommended libs like lang_detect)
+# Confirms what the text says - it's best to know encoding first-hand. Guessing is bad.
 
 # ## Problem 2
 # Unicode database
