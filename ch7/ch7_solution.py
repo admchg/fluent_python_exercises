@@ -60,11 +60,11 @@ def memoize(func):
 @count_calls
 def recursive_solution(*, t, index):  # DON'T CHANGE FUNCTION SIGNATURE
 
-    if (t == 0) or (index > len(meeting_hours)):
+    if (t <= 0) or (index > len(meeting_hours)):
         return 0
     elif index == (len(meeting_hours) - 1):
         if t >= meeting_hours[index]:
-            return meeting_hours[index] * meeting_useful[index]
+            return meeting_useful[index]
         else:
             return 0
     else:
@@ -104,5 +104,6 @@ def recursive_solution(*, t, index):  # DON'T CHANGE FUNCTION SIGNATURE
 # How many calls, if you memoize?
 
 
-recursive_solution(t=20, index=0)
-print(recursive_solution.call_count)
+# answer = recursive_solution(t=20, index=0)
+# print(answer)
+# print(recursive_solution.call_count)
