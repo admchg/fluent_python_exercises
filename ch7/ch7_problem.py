@@ -26,11 +26,18 @@ meeting_hours = [1, 1.5, 1.5, 1.5, 2, 2, 2.5, 2.5, 3] * 3
 meeting_useful = [1, 0, 2, 1, 4, 2, 2, 3, 3] * 3
 
 
+@count_calls
 def recursive_solution(*, t, index):  # DON'T CHANGE FUNCTION SIGNATURE
-    pass
+
+    if t <= 0:
+        return 0
+    else:
+        return meeting_useful[index] + recursive_solution(
+            t=t - meeting_hours[index], index=index + 1
+        )
 
 
-recursive_solution(t=20, index=0)
+recursive_solution(t=5, index=0)
 
 
 # ## Part 2 - Write a decorator!
@@ -46,10 +53,17 @@ recursive_solution(t=20, index=0)
 
 
 def count_calls(func):
-    return func
+    count_calls.call_count = 1
+
+    def wrapped(*args, **kwargs):
+        res = func(*args, **kwargs)
+        count_calls.call_count += 1
+        return res
+
+    return wrapped
 
 
-recursive_solution(t=20, index=0)
+recursive_solution(t=30, index=0)
 print(recursive_solution.call_count)
 
 
@@ -64,7 +78,17 @@ print(recursive_solution.call_count)
 
 
 def memoize(func):
-    return func
+    memoize.cache = {}
+
+    def wrapper(*args, t, index):
+        if (t, meeting_hours[index], meeting_useful[index]) in memoize.cache:
+            return memoize.cache[(t, meeting_hours[index], meeting_useful[index])]
+        else:
+            res = func(*args, t=t, index=index)
+            memoize.cache[(t, meeting_hours[index], meeting_useful[index])] = res
+            return res
+
+    return wrapper
 
 
 recursive_solution(t=20, index=0)
