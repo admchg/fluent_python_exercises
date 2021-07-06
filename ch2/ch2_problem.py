@@ -36,9 +36,21 @@ def check_brackets(input_string):
     False
     """
 
+    def annhilate(left, right):
+        if bracket_map[left] == right:
+            return 0
+        else:
+            return 1
+
     bracket_starts = "{[("
     bracket_ends = "}])"
     bracket_map = dict(zip(bracket_starts, bracket_ends))
+
+    (
+        bracket_map[x] if x in bracket_starts else x
+        for x in input_string
+        if x in bracket_ends or x in bracket_starts
+    )
 
     return False
 
@@ -74,6 +86,24 @@ def my_histogram(input_array, bins, include=False):
     [2, 1, 2]
     """
     counter = [0] * (len(bins) + 1)
+
+    bins_extend = [0] + bins
+    input_sorted = sorted(input_array)
+
+    if include:
+        cuts = [
+            bisect.bisect(input_sorted, bins_extend[i])
+            - bisect.bisect(input_sorted, bins_extend[i - 1])
+            for i in range(1, len(bins_extend))
+        ]
+    else:
+        cuts = [
+            bisect.bisect_left(input_sorted, bins_extend[i])
+            - bisect.bisect_left(input_sorted, bins_extend[i - 1])
+            for i in range(1, len(bins_extend))
+        ]
+
+    counter = cuts + [len(input_sorted) - sum(cuts)]
 
     return counter
 

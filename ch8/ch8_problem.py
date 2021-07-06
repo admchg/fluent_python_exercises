@@ -18,8 +18,20 @@ def smooth_vector(a, inplace=False):
         raise ValueError("`a` should be at least of length 3")
 
     # Write code here
+    # I REFUSE to use convolve
+    z = np.array(a)
+    ahead = np.concatenate([z[1:], [0]])
+    ahead = np.concatenate([[ahead[0] * (1 / 3)], ahead[1:] * 0.25])
+    behind = np.concatenate([[0], z[:-1]])
+    behind = np.concatenate([behind[:-1] * 0.25, [behind[-1] * (1 / 3)]])
+    z = np.concatenate([[(2 / 3) * z[0]], 0.5 * z[1:-1], [(2 / 3) * z[-1]]])
+    smoothed = z + ahead + behind
 
-    return a
+    if inplace:
+        a[:] = smoothed
+        return a
+    else:
+        return smoothed
 
 
 # Qb: You are writing a MMORPG called Fiablo. You boss wants the following functionality
@@ -46,13 +58,18 @@ class DeckardCain:
         def __repr__(self):
             return f"DeckardCain({self.age}, {self.gender})"
 
-    instance = None
+    instance = weakref.WeakValueDictionary()  # None
 
     def __new__(cls):
 
-        # Write code here
-
-        pass
+        # # Write code here
+        if cls not in cls.instance.keys():
+            instance = cls._DeckardCain()
+            cls.instance[cls] = instance
+        return weakref.ref(cls.instance[cls])()
+        # if cls.instance is None:
+        #     cls.instance = weakref.ref(cls._DeckardCain())
+        # return cls.instance()()
 
     def __getattr__(self, name):
         return __getattr__(self.instance, name)
@@ -62,3 +79,6 @@ class DeckardCain:
 
     def __repr__(self):
         return self.instance.__repr__()
+
+
+a = DeckardCain()
