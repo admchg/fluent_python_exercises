@@ -52,7 +52,7 @@ class FinVect(np.ndarray):
     def monic(self):
         return 0
 
-    # Create a Boolean attribute for indicating whether the matrix is injective
+    # Create a Boolean attribute for indicating whether the matrix is surjective
 
     @property
     def epi(self):
