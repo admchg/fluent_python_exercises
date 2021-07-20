@@ -21,27 +21,27 @@ class FinVect(np.ndarray):
 
     @property
     def dom(self):
-        """ Return the domain of the matrix (cols)"""
+        """Return the domain of the matrix (cols)"""
         return self.shape[1]
 
     @property
     def cod(self):
-        """ Return the codomain of the matrix (rows)"""
+        """Return the codomain of the matrix (rows)"""
         return self.shape[0]
 
     # Add two staticmethods to FinVect.
     # The first should take an integer n (representing a vector space of dimension n)
     # It should return a matrix which takes any vector space of dimension n to itself
     # i.e. some M such that Mx = x for x in some n dimensional vector space
-
+    @staticmethod
     def idd(n):
-        return 0
+        return np.eye(n)
 
     # The second should implement matrix multiplication
     # i.e. take two matrices f and g then multiply them together
-
+    @staticmethod
     def compose(f, g):
-        return 0
+        return f @ g
 
     # A matrix is injective if the rank is the same dimension as the domain (this means if M*x = 0, then x =  0)
     # A matrix is surjective if the rank is the same dimension as the codomain
@@ -50,13 +50,13 @@ class FinVect(np.ndarray):
 
     @property
     def monic(self):
-        return 0
+        return self.dom == np.linalg.matrix_rank(self)
 
     # Create a Boolean attribute for indicating whether the matrix is surjective
 
     @property
     def epi(self):
-        return 0
+        return self.cod == np.linalg.matrix_rank(self)
 
     # An initial object is a vector space which has a unique map to every other vector space
     # A terminal object is a vector space which has a unique map from every other vector space
