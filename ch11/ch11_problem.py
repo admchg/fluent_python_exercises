@@ -1,4 +1,4 @@
-# Chapter 10 Exercises
+# Chapter 11
 
 # ---------------------------------
 # 1.a. Create a class 'Record' meeting the following requirements:
