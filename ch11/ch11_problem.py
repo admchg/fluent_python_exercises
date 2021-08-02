@@ -27,7 +27,7 @@ del student['Subject']
 
 # ---------------------------------
 # What if we want to be able to retrieve the list of items in a Record
-# 1.b Use Monkey Patching to make the following Test 2 code work
+# 1.b Use Monkey Patching to make the following Test 1.b code work
 
 # Add code
 
@@ -36,6 +36,7 @@ del student['Subject']
 for column, value in student.items():
     print(f'{column}: {value}')
 
+assert(len(student.items()) == 3)
 
 
 # ---------------------------------
