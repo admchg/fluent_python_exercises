@@ -9,10 +9,10 @@ class LivingThing:
         self.name = name
 
     def birth(self):
-        print(f"{self} is born")
+        print("f{self} is born")
 
     def death(self):
-        print(f"{self} is dead")
+        print("f{self} is dead")
 
 
 class ThingsThatMove:
@@ -38,15 +38,15 @@ class ThingsThatFly(ThingsThatMove):
 
 
 class ThingsThatBirthYoung:
-    def birth(self):
+    def give_birth(self):
         print("f{self} birthed a baby")
 
     def suckle_young(self):
-        print("f{suckle}")
+        print("f{self} suckled young")
 
 
 class ThingsThatLayEggs:
-    def birth(self):
+    def give_birth(self):
         print(f"{self} laid an egg")
 
 
@@ -62,30 +62,30 @@ class Bird(LivingThing, ThingsThatFly, ThingsThatLayEggs):
 
 ## Q2: create the following subclasses
 ### Q2.1
-class Peacock:
+class Peacock(Bird):
     # Shoukd also dance in the rain
     pass
 
 
 ### Q2.2
-class Bat:
+class Bat(Mammal):
     # It's a weird mammal
     pass
 
 
 ### Q2.3
-class Platypus:
+class Platypus(Mammal):
     # Lol. Good luck.
     pass
 
 
 ### Q2.4
-class Whale:
+class Whale(Mammal):
     # Can move in all directions in water
     pass
 
 
 ### Q2.5
-class Human:
+class Human(Mammalbe):
     # Should also pay taxes
     pass
