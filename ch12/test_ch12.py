@@ -62,6 +62,19 @@ def test_objects_can_move2d(two_d_mover):
     assert hasattr(two_d_mover, "move_left")
 
 
-def test_weird_platypus(platypus):
+def test_weird_platypus(capsys, platypus):
     assert hasattr(platypus, "suckle_young")
-    assert platypus.give_birth() == "PL laid an egg"
+    platypus.give_birth()
+    captured = capsys.readouterr()
+    assert captured.out == "PL laid an egg\n"
+
+
+@pytest.mark.parametrize(
+    "suckler", pytest.lazy_fixture(("whale", "bat", "platypus", "human"))
+)
+def test_suckle_young(suckler):
+    assert hasattr(suckler, "suckle_young")
+
+
+def test_peacocks_dont_suckle(peacock):
+    assert not hasattr(peacock, "suckle_young")

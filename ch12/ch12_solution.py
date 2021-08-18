@@ -3,8 +3,10 @@
 ##     anything you like and add additional classes etc. - I'm hoping this
 ##     makes for a healty discussion on inheritance and design choices.
 
+from abc import ABC, abstractmethod
 
-class LivingThing:
+
+class LivingThing(ABC):
     def __init__(self, name):
         self.name = name
 
@@ -14,8 +16,15 @@ class LivingThing:
     def death(self):
         print("f{self} is dead")
 
+    def __repr__(self):
+        return self.name
 
-class ThingsThatMove:
+    @abstractmethod
+    def give_birth(self):
+        pass
+
+
+class ThingsThatMove2dMixin:
     def move_left(self):
         print(f"{self} moves left")
 
@@ -29,7 +38,7 @@ class ThingsThatMove:
         print(f"{self} moves backward")
 
 
-class ThingsThatFly(ThingsThatMove):
+class ThingsThatMove3dMixin(ThingsThatMove2dMixin):
     def move_up(self):
         print(f"{self} moves up")
 
@@ -37,55 +46,51 @@ class ThingsThatFly(ThingsThatMove):
         print(f"{self} moves up")
 
 
-class ThingsThatBirthYoung:
+class ThingsThatBirthYoungMixin:
     def give_birth(self):
-        print("f{self} birthed a baby")
+        print(f"{self} birthed a baby")
 
     def suckle_young(self):
-        print("f{self} suckled young")
+        print(f"{self} suckled young")
 
 
-class ThingsThatLayEggs:
+class ThingsThatLayEggsMixin:
     def give_birth(self):
         print(f"{self} laid an egg")
 
 
-class Mammal(LivingThing, ThingsThatMove):
-    def __repr__(self):
-        return f"Animal[{self.name}]"
-
-
-class Bird(LivingThing, ThingsThatFly, ThingsThatLayEggs):
-    def __repr__(self):
-        return f"Bird[{self.name}]"
-
-
 ## Q2: create the following subclasses
 ### Q2.1
-class Peacock(Bird):
+class Peacock(ThingsThatMove3dMixin, ThingsThatLayEggsMixin, LivingThing):
     # Shoukd also dance in the rain
     pass
 
 
 ### Q2.2
-class Bat(Mammal):
+class Bat(ThingsThatMove3dMixin, ThingsThatBirthYoungMixin, LivingThing):
     # It's a weird mammal
     pass
 
 
 ### Q2.3
-class Platypus(Mammal):
+class Platypus(
+    ThingsThatMove3dMixin,
+    ThingsThatLayEggsMixin,
+    ThingsThatBirthYoungMixin,
+    LivingThing,
+):
     # Lol. Good luck.
     pass
 
 
 ### Q2.4
-class Whale(Mammal):
+class Whale(ThingsThatMove3dMixin, ThingsThatBirthYoungMixin, LivingThing):
     # Can move in all directions in water
     pass
 
 
 ### Q2.5
-class Human(Mammalbe):
+class Human(ThingsThatMove2dMixin, ThingsThatBirthYoungMixin, LivingThing):
     # Should also pay taxes
-    pass
+    def pay_taxes(self):
+        print("$$ ->")
