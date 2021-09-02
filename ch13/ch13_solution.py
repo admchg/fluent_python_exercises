@@ -28,13 +28,8 @@ class ClockFaceTime:
     def __eq__(self, other):
         if isinstance(other, ClockFaceTime):
             return all(a == b for a, b in zip(self, other))
-
-    def __ne__(self, other):
-        eq_result = self == other
-        if eq_result is NotImplemented:
-            return NotImplemented
         else:
-            return not eq_result
+            return NotImplemented
 
     def __gt__(self, other):
         if isinstance(other, ClockFaceTime):
@@ -42,6 +37,8 @@ class ClockFaceTime:
                 return True
             else:
                 return False
+        else:
+            return NotImplemented
 
     def __lt__(self, other):
         if isinstance(other, ClockFaceTime):
@@ -49,6 +46,8 @@ class ClockFaceTime:
                 return True
             else:
                 return False
+        else:
+            return NotImplemented
 
     def __ge__(self, other):
         lt_result = self < other
@@ -130,19 +129,14 @@ class ClockFaceTimeDelta:
         else:
             return NotImplemented
 
-    def __ne__(self, other):
-        eq_result = self == other
-        if eq_result is NotImplemented:
-            return NotImplemented
-        else:
-            return not eq_result
-
     def __gt__(self, other):
         if isinstance(other, ClockFaceTimeDelta):
             if self.__convert_delta_to_seconds(self) > self.__convert_delta_to_seconds(other):
                 return True
             else:
                 return False
+        else:
+            return NotImplemented
 
     def __lt__(self, other):
         if isinstance(other, ClockFaceTimeDelta):
@@ -150,6 +144,8 @@ class ClockFaceTimeDelta:
                 return True
             else:
                 return False
+        else:
+            return NotImplemented
 
     def __ge__(self, other):
         lt_result = self < other
