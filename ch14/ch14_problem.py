@@ -14,13 +14,16 @@ def my_enumerate(iterable):
     >>> list(my_enumerate(["Hello"]))
     [('Hello', 0)]
 
-    >>> list(enumerate(None))
+    >>> list(my_enumerate(None))
     Traceback (most recent call last):
         ...
     TypeError: 'NoneType' object is not iterable
     """
 
-    pass
+    i = 0
+    for item in iterable:
+        yield item, i
+        i += 1
 
 
 # Exercise 2
@@ -30,13 +33,25 @@ def my_enumerate(iterable):
 def piz(*iterables):
     """
     >>> list(piz([1,2,3], [4,5,6], [7,8,9,10]))
-    [(7,4,1), (8,5,2), (9,6,3)]
+    [(7, 4, 1), (8, 5, 2), (9, 6, 3)]
 
     >>> list(piz("idinsight", "hnisolnso"))
     [('h', 'i'), ('n', 'd'), ('i', 'i'), ('s', 'n'), ('o', 's'), ('l', 'i'), ('n', 'g'), ('s', 'h'), ('o', 't')]
+
+    >>> list(piz(range(5), range(10, 5, -1)))
+    [(10, 0), (9, 1), (8, 2), (7, 3), (6, 4)]
     """
 
-    pass
+    iterators = [iter(i) for i in reversed(iterables)]
+    while iterators:
+        result = []
+        sentinel = object()
+        for it in iterators:
+            elem = next(it, sentinel)
+            if elem is sentinel:
+                return
+            result.append(elem)
+        yield (tuple(result))
 
 
 if __name__ == "__main__":
