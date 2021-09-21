@@ -36,7 +36,7 @@ def piz(*iterables):
     >>> list(piz("idinsight", "hnisolnso"))
     [('h', 'i'), ('n', 'd'), ('i', 'i'), ('s', 'n'), ('o', 's'), ('l', 'i'), ('n', 'g'), ('s', 'h'), ('o', 't')]
     """
-    zipped_list = list(zip(*iterables))
+    zipped_list = zip(*iterables)
     for item in zipped_list:
         yield item[::-1]
     return
