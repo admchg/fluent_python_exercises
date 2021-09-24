@@ -19,6 +19,7 @@
 # You want espresso?
 # 1
 # Fine, I will get you espresso
+# <The program exits here>
 
 
 ## Sample Conversation 2 (The numbers are inputs by the user)
