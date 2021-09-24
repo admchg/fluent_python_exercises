@@ -27,7 +27,7 @@ class Timeout:
     def __enter__(self):
         return 0
 
-    def __exist__(self, *):
+    def __exit__(self, *):
         return 0
 
 
