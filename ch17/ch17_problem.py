@@ -23,7 +23,7 @@ def create_folders(path_array):
     """
     Function to create the folders parallely
     """
-    return len(path_array)
+    pass
 
 
 # Exercise 2: Write a function `count_primes` to count the number of prime numbers in a given list
