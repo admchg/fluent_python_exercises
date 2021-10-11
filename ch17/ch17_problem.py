@@ -7,7 +7,7 @@ import time
 import random
 
 # 1: Complete the functions `create_folders` using the function `create_each_folder_sleepily` and
-# concurrent.futures
+# any one of the threading/multiprocessing modules
 # Compare this with a sequential execution to check if you are getting any performance gains
 
 
@@ -27,7 +27,7 @@ def create_folders(path_array):
 
 
 # Exercise 2: Write a function `count_primes` to count the number of prime numbers in a given list
-# and return that count, using concurrent.futures
+# and return that count, using any one of the threading/multiprocessing modules
 # Compare this with a sequential execution to check if you are getting any performance gains
 
 
